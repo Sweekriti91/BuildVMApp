@@ -1,0 +1,37 @@
+name: Build Xamarin.Forms app
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macos-13
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install Xamarin via Boots
+      run: |
+        dotnet tool install -g boots
+        boots --stable Mono
+        boots --stable Xamarin.Android
+        boots --stable Xamarin.iOS
+    
+    - name: Set default Xcode 15.2
+      run: |
+        XCODE_ROOT=/Applications/Xcode_15.2.app
+        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+        sudo xcode-select -s $XCODE_ROOT
+
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: Install dependencies
+      run: nuget restore BuildVMApp.sln
+
+    - name: Build iOS
+      run: msbuild BuildVMApp/BuildVMApp.iOS/BuildVMApp.iOS.csproj /p:Configuration=Debug /p:Platform=iPhoneSimulator /t:Rebuild
+
+    - name: Build Android
+      run: msbuild BuildVMApp/BuildVMApp.Android/BuildVMApp.Android.csproj /t:PackageForAndroid /p:Configuration=Debug  
