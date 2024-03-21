@@ -15,21 +15,21 @@ jobs:
 
   steps:
 
-  - task: Bash@3
-    displayName: Install Xamarin Components
-    inputs:
-      targetType: 'inline'
-      script: |
-        brew install --cask xamarin-ios
-        brew install --cask xamarin-android
-  
   # - task: Bash@3
-  #   displayName: Install Xamarin Components
+  #   displayName: Install Xamarin Components via HomeBrew
   #   inputs:
   #     targetType: 'inline'
   #     script: |
-  #       chmod +x install_xam.sh
-  #       ./install_xam.sh
+  #       brew install --cask xamarin-ios
+  #       brew install --cask xamarin-android
+  
+  - task: Bash@3
+    displayName: Install Xamarin Components via custom Script
+    inputs:
+      targetType: 'inline'
+      script: |
+        chmod +x install_xam.sh
+        ./install_xam.sh
       
   - task: CmdLine@2
     displayName: Set Xcode Version
