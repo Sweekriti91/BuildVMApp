@@ -12,15 +12,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
-    # - name: Install Xamarin
+
+    - name: Install Xamarin via Custom Script
+      run: |
+        sh install_xam.sh
+
+    # - name: Install Xamarin via HomeBrew
     #   run: |
     #     brew install --cask xamarin-ios
     #     brew install --cask xamarin-android
 
-    - name: Install Xamarin
-      run: |
-        sh install_xam.sh
+    # - name: Install Xamarin via boots
+    #   run: |
+    #     dotnet tool install -g boots
+    #     boots --stable Xamarin.Android
+    #     boots --stable Xamarin.iOS
     
     - name: Set default Xcode 15.2
       run: |
