@@ -1,6 +1,9 @@
 name: Build Xamarin.Forms app
 
-on: [push]
+on:
+  push:
+    branches:
+      - dev
 
 jobs:
   build:
