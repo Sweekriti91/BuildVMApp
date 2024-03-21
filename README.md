@@ -71,8 +71,7 @@ GitHub Actions :
 
 ## Using dotnet tool [boots](https://github.com/jonathanpeppers/boots/tree/main) 
 
-> ⚠️ :warning: **boots tool is not actively maintained.**
-For issues, fork the repo and make fixes as needed. 
+> :warning: **boots tool is not actively maintained.** :warning:
 
 For more information on [boots](https://github.com/jonathanpeppers/boots/tree/main), check the [repo](https://github.com/jonathanpeppers/boots/tree/main?tab=readme-ov-file#boots). 
 
