@@ -19,7 +19,7 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        ls -a
+        chmod +x install_xam.sh
       
   # - task: CmdLine@2
   #   inputs:
