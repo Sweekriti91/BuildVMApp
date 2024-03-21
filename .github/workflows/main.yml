@@ -9,10 +9,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
+    # - name: Install Xamarin
+    #   run: |
+    #     brew install --cask xamarin-ios
+    #     brew install --cask xamarin-android
+
     - name: Install Xamarin
       run: |
-        brew install --cask xamarin-ios
-        brew install --cask xamarin-android
+        sh install_xam.sh
     
     - name: Set default Xcode 15.2
       run: |
