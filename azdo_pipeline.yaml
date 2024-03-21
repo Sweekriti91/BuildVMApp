@@ -22,26 +22,27 @@ jobs:
         chmod +x install_xam.sh
         ./install_xam.sh
       
-  # - task: CmdLine@2
-  #   inputs:
-  #     script: '/bin/bash -c "echo ''##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]''$(/Applications/Xcode_15.2.app);sudo xcode-select --switch $(/Applications/Xcode_15.2.app)/Contents/Developer"'
-  # - task: NuGetCommand@2
-  #   inputs:
-  #     command: 'restore'
-  #     restoreSolution: 'BuildVMApp.sln'
-  #     feedsToUse: 'select'
+  - task: CmdLine@2
+    inputs:
+      script: '/bin/bash -c "echo ''##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]''$(/Applications/Xcode_15.2.app);sudo xcode-select --switch $(/Applications/Xcode_15.2.app)/Contents/Developer"'
+  
+  - task: NuGetCommand@2
+    inputs:
+      command: 'restore'
+      restoreSolution: 'BuildVMApp.sln'
+      feedsToUse: 'select'
 
-  # - task: XamarinAndroid@1
-  #   inputs:
-  #     projectFile: 'BuildVMApp/BuildVMApp.Android/BuildVMApp.Android.csproj'
-  #     configuration: '$(buildConfiguration)'
-  #     msbuildVersionOption: 'latest'
-  #     jdkOption: 'JDKVersion'
+  - task: XamarinAndroid@1
+    inputs:
+      projectFile: 'BuildVMApp/BuildVMApp.Android/BuildVMApp.Android.csproj'
+      configuration: '$(buildConfiguration)'
+      msbuildVersionOption: 'latest'
+      jdkOption: 'JDKVersion'
 
-  # - task: XamariniOS@2
-  #   inputs:
-  #     solutionFile: 'BuildVMApp.sln'
-  #     configuration: 'Debug'
-  #     packageApp: false
-  #     buildForSimulator: true
-  #     runNugetRestore: false
+  - task: XamariniOS@2
+    inputs:
+      solutionFile: 'BuildVMApp.sln'
+      configuration: 'Debug'
+      packageApp: false
+      buildForSimulator: true
+      runNugetRestore: false
