@@ -14,7 +14,15 @@ jobs:
     outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
 
   steps:
-
+  
+  # - task: Bash@3
+  #   displayName: Install Xamarin Components via custom Script
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       chmod +x install_xam.sh
+  #       ./install_xam.sh
+      
   # - task: Bash@3
   #   displayName: Install Xamarin Components via HomeBrew
   #   inputs:
@@ -22,15 +30,16 @@ jobs:
   #     script: |
   #       brew install --cask xamarin-ios
   #       brew install --cask xamarin-android
-  
+
+
   - task: Bash@3
-    displayName: Install Xamarin Components via custom Script
+    displayName: Install Xamarin Components via boots
     inputs:
       targetType: 'inline'
       script: |
-        chmod +x install_xam.sh
-        ./install_xam.sh
-      
+        dotnet tool install -g boots
+        boots --stable Xamarin.Android
+        boots --stable Xamarin.iOS
   - task: CmdLine@2
     displayName: Set Xcode Version
     inputs:
