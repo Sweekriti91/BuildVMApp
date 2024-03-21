@@ -5,7 +5,7 @@
 
 jobs:
 
-- job: Android
+- job: XamarinFormsBuild
   pool:
     vmImage: 'macos-13'
 
@@ -17,7 +17,10 @@ jobs:
   
   - task: Bash@3
     inputs:
-      filePath: 'install_xam.sh'
+      targetType: 'inline'
+      script: |
+        chmod +x install_xam.sh
+        sh install_xam.sh
       
   - task: CmdLine@2
     inputs:
