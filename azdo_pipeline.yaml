@@ -14,22 +14,31 @@ jobs:
     outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
 
   steps:
-  - task: NuGetToolInstaller@1
-
+  
+  - task: Bash@3
+    inputs:
+      filePath: 'install_xam.sh'
+      
+  - task: CmdLine@2
+    inputs:
+      script: '/bin/bash -c "echo ''##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]''$(/Applications/Xcode_15.2.app);sudo xcode-select --switch $(/Applications/Xcode_15.2.app)/Contents/Developer"'
   - task: NuGetCommand@2
     inputs:
-      restoreSolution: '**/*.sln'
+      command: 'restore'
+      restoreSolution: 'BuildVMApp.sln'
+      feedsToUse: 'select'
 
   - task: XamarinAndroid@1
     inputs:
-      projectFile: '**/*droid*.csproj'
-      outputDirectory: '$(outputDirectory)'
+      projectFile: 'BuildVMApp/BuildVMApp.Android/BuildVMApp.Android.csproj'
       configuration: '$(buildConfiguration)'
-      msbuildVersionOption: '16.0'
+      msbuildVersionOption: 'latest'
+      jdkOption: 'JDKVersion'
 
   - task: XamariniOS@2
     inputs:
-      solutionFile: '**/*.sln'
-      configuration: 'Release'
-      buildForSimulator: true
+      solutionFile: 'BuildVMApp.sln'
+      configuration: 'Debug'
       packageApp: false
+      buildForSimulator: true
+      runNugetRestore: false
