@@ -28,8 +28,8 @@ jobs:
     - name: Install dependencies
       run: nuget restore BuildVMApp.sln
 
-    # - name: Build iOS
-    #   run: msbuild BuildVMApp/BuildVMApp.iOS/BuildVMApp.iOS.csproj /p:Configuration=Debug /p:Platform=iPhoneSimulator /t:Rebuild
+    - name: Build iOS
+      run: msbuild BuildVMApp/BuildVMApp.iOS/BuildVMApp.iOS.csproj /p:Configuration=Debug /p:Platform=iPhoneSimulator
 
     - name: Build Android
       run: msbuild BuildVMApp/BuildVMApp.Android/BuildVMApp.Android.csproj /t:PackageForAndroid /p:Configuration=Debug  
