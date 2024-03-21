@@ -2,8 +2,11 @@ name: Build Xamarin.Forms app
 
 on:
   push:
-    branches:
-      - dev
+    # branches: [ main ]
+  pull_request:
+    # branches: [ main ]
+
+  workflow_dispatch:
 
 jobs:
   build:
